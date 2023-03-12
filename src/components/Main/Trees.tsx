@@ -12,8 +12,9 @@ export type GLTFResult = GLTF & {
 	};
 };
 
+const TREE_PATH = `${(localStorage.getItem("__baseUrl") || '')}/trees.glb`;
 export const Trees = forwardRef((props: { colors: Color[], position: [number, number, number]}, ref: Ref<Group>) => {
-	const { nodes } = useGLTF("/trees.glb") as GLTFResult;
+	const { nodes } = useGLTF(TREE_PATH) as GLTFResult;
 	const uniforms: ShaderMaterial['uniforms'] = useMemo(() => {
 		return {
 			colorMap: {
@@ -45,4 +46,4 @@ export const Trees = forwardRef((props: { colors: Color[], position: [number, nu
 	);
 });
 
-useGLTF.preload("/trees.glb");
+useGLTF.preload(TREE_PATH);

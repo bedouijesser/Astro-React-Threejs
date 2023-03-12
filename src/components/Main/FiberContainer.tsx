@@ -3,7 +3,7 @@ import { OrbitControls } from "@react-three/drei";
 import { Scene } from "./Scene";
 import { Ground } from "./Ground";
 
-export function FiberContainer() {
+export const FiberContainer = () =>  {
 	return (
 		<Canvas camera={{ position: [14.4666, 2.0365, 5.556165], fov: 40 }} shadows>
 			<Scene />
