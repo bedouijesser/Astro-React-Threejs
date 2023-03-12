@@ -20,4 +20,7 @@ localStorage.setItem("__baseUrl", import.meta.env.BASE_URL)
 	<body>
 		<FiberContainer client:load></FiberContainer>
 	</body>
+	<script is:inline>
+		localStorage.setItem("__baseUrl", import.meta.env.BASE_URL)
+	</script>
 </html>
