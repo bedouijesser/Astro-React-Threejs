@@ -1,6 +1,5 @@
 ---
 import { FiberContainer } from '../components/Main/FiberContainer';
-localStorage.setItem("__baseUrl", import.meta.env.BASE_URL)
 ---
 
 <html lang="en">
@@ -21,6 +20,6 @@ localStorage.setItem("__baseUrl", import.meta.env.BASE_URL)
 		<FiberContainer client:load></FiberContainer>
 	</body>
 	<script is:inline>
-		localStorage.setItem("__baseUrl", import.meta.env.BASE_URL)
+		localStorage.setItem("__baseUrl", (import.meta.env.BASE_URL))
 	</script>
 </html>
