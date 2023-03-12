@@ -3,6 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import { Ref, forwardRef, useMemo } from "react";
 import { BufferGeometry, Color, Group, Mesh, ShaderMaterial, Vector3 } from "three";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { useFrame } from "@react-three/fiber";
 export type GLTFResult = GLTF & {
 	nodes: {
 		Pyramid: Mesh;
@@ -15,6 +16,11 @@ export type GLTFResult = GLTF & {
 const TREE_PATH = `${(localStorage.getItem("__baseUrl"))}trees.glb`;
 export const Trees = forwardRef((props: { colors: Color[], position: [number, number, number]}, ref: Ref<Group>) => {
 	const { nodes } = useGLTF(TREE_PATH) as GLTFResult;
+	useFrame((state, delta) => {
+		const {current: group } = ref;
+		group.rotation.x += 0.01
+	});
+
 	const uniforms: ShaderMaterial['uniforms'] = useMemo(() => {
 		return {
 			colorMap: {

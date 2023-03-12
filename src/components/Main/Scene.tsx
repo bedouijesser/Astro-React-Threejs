@@ -1,10 +1,12 @@
 import { useFrame } from "@react-three/fiber";
 import { Ref, useRef, useState } from "react";
 import { BufferGeometry, Color, Group, Material, Mesh, Vector3 } from "three";
+import { GhibliShader } from "./GhiibliShader";
 import { Trees } from "./Trees";
 
-function Box(props: { position: Vector3 | [number, number, number] }) {
+function Box(props: { position: [number, number, number] }) {
 	const mesh = useRef<Mesh<BufferGeometry, Material | Material[]>>();
+	
 	const [hovered, setHover] = useState(false);
 	const [active, setActive] = useState(false);
 	useFrame((state, delta) => (mesh.current.rotation.x += delta));
@@ -19,22 +21,17 @@ function Box(props: { position: Vector3 | [number, number, number] }) {
 			onPointerOut={(event) => setHover(false)}
 		>
 			<boxGeometry args={[1, 1, 1]} />
-			<meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
+			<shaderMaterial attach='material' {...GhibliShader} uniforms={GhibliShader.uniforms} />
 		</mesh>
 	);
 }
 
 export const Scene = () => {
 	const refTrees = useRef<Group>(null);
-	useFrame(() => {
-		const { current: group } = refTrees;
-		if (group) {
-			group.rotation.x = group.rotation.y += 0.01;
-		}
-	});
+	
 	return (
 		<>
-			<ambientLight intensity={0.5} />
+			<ambientLight intensity={0.1} />
 			<directionalLight
 				color={"white"}
 				position={[15, 15, 15]}
@@ -62,6 +59,7 @@ export const Scene = () => {
 					new Color("#143b36").convertLinearToSRGB(),
 				]}
 			/>
+			<Box position={[0,0,0]}/>
 		</>
 	);
 };
