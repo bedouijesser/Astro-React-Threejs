@@ -26,7 +26,6 @@ function Box(props: { position: Vector3 | [number, number, number] }) {
 
 export const Scene = () => {
 	const refTrees = useRef<Group>(null);
-	console.debug(refTrees)
 	useFrame(() => {
 		const { current: group } = refTrees;
 		if (group) {
